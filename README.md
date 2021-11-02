@@ -19,10 +19,10 @@ Some examples to reproduce results in the paper.
 # 1. Installation
 ##### 1.1 OS: Mac OS X or Linux(tested on Ubuntu and Debian)
 ##### 1.2 Pytorch(1.0.0) which can be installed with details provided here: https://pytorch.org/get-started/locally/
-For most users, ```pip3 install torch torchvision``` should work.
+For most users, ```pip install torch torchvision``` should work.
 If you are using Anaconda, ```conda install pytorch torchvision -c pytorch``` should work. 
 ##### 1.3 Microsoft NNI toolkit: Details of installation provided here: https://github.com/Microsoft/nni/
-For most users, ```pip3 install nni``` should work.
+For most users, ```pip install nni``` should work.
 
 
 # 2. Running The code
