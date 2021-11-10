@@ -12,14 +12,16 @@ def is_resnet(name):
 	return name.startswith('resnet')
 
 
-def create_cnn_model(name, dataset="cifar100", use_cuda=False):
+def create_cnn_model(name, dataset="cifar100", use_cuda=False,num_classes=None):
 	"""
 	Create a student for training, given student name and dataset
 	:param name: name of the student. e.g., resnet110, resnet32, plane2, plane10, ...
 	:param dataset: the dataset which is used to determine last layer's output size. Options are cifar10 and cifar100.
 	:return: a pytorch student for neural network
 	"""
-	num_classes = 100 if dataset == 'cifar100' else 10
+	if num_classes is None:
+		num_classes = 100 if dataset == 'cifar100' else 10
+
 	model = None
 	if is_resnet(name):
 		resnet_size = name[6:]

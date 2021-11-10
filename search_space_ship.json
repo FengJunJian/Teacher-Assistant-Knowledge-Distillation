@@ -1,0 +1,6 @@
+{ "lambda_student":{"_type":"choice", "_value":[0.3000]},
+  "T_student":{"_type":"choice", "_value":[10]},
+  "seed":{"_type":"choice", "_value":[20]},
+  "teacher": {"_type":"choice", "_value":["resnet56"]},
+  "student": {"_type":"choice", "_value":["resnet14","resnet20","resnet26","resnet32","resnet44"]}
+}

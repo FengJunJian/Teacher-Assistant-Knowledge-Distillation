@@ -5,6 +5,23 @@ from torch.utils.data import DataLoader
 from copy import copy
 NUM_WORKERS = 2
 
+ship_classes=[
+'vessel',
+ 'Boat',
+ 'bulk_cargo_carrier',
+ 'Buoy',
+ 'container_ship',
+ 'Ferry',
+ 'fishing_boat',
+ 'general_cargo_ship',
+ 'Kayak',
+ 'ore_carrier',
+ 'Other',
+ 'passenger_ship',
+ 'Sail_boat',
+ 'Speed_boat'
+]
+
 
 def get_cifar(num_classes=100, dataset_dir='./data', batch_size=128, crop=False):
 	"""
@@ -57,12 +74,13 @@ def get_ship(num_classes=14, dataset_dir='./data', batch_size=128, crop=True):
 	"""
 
 	normalize = transforms.Normalize(mean=(0.51264606, 0.55715489, 0.6386575), std=(0.15772002, 0.14560729, 0.13691749))
-	simple_transform = transforms.Compose([transforms.ToTensor(), normalize])
+	simple_transform = transforms.Compose([transforms.Resize((32, 64)),transforms.RandomCrop(32, padding=4),
+										   transforms.ToTensor(), normalize])
 
 	if crop is True:
 		train_transform = transforms.Compose([
-			transforms.Resize((64, 128)),  # (h,w)
-			transforms.RandomCrop(64, padding=4),
+			transforms.Resize((32, 64)),  # (h,w) (64,128)
+			transforms.RandomCrop(32, padding=4),#(32)
 			transforms.RandomHorizontalFlip(),
 			transforms.ToTensor(),
 			normalize
@@ -70,18 +88,6 @@ def get_ship(num_classes=14, dataset_dir='./data', batch_size=128, crop=True):
 	else:
 		train_transform = simple_transform
 
-	# if num_classes == 100:
-	# 	trainset = torchvision.datasets.CIFAR100(root=dataset_dir, train=True,
-	# 											 download=True, transform=train_transform)
-	#
-	# 	testset = torchvision.datasets.CIFAR100(root=dataset_dir, train=False,
-	# 											download=True, transform=simple_transform)
-	# else:
-	# 	trainset = torchvision.datasets.CIFAR10(root=dataset_dir, train=True,
-	# 											download=True, transform=train_transform)
-	#
-	# 	testset = torchvision.datasets.CIFAR10(root=dataset_dir, train=False,
-	# 										   download=True, transform=simple_transform)
 	dataset = torchvision.datasets.ImageFolder(dataset_dir)  # transform=transforms.ToTensor()
 	N = len(dataset)
 	train_size = int(N * 0.8)

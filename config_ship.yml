@@ -1,12 +1,15 @@
-authorName: Anonymous
-experimentName: TAKD
+authorName: FJJ
+experimentName: TAKD_SHIP
 trialConcurrency: 1
 maxExecDuration: 48h
 maxTrialNum: 1
 
 #choice: local, remote, pai
 trainingServicePlatform: local
-searchSpacePath: search_space.json
+searchSpacePath: search_space_ship.json
+localConfig:
+  useActiveGpu: true            #
+  maxTrialNumPerGpu: 100        #
 #choice: true, false
 useAnnotation: false
 #use_active_gpu: true
@@ -18,6 +21,6 @@ tuner:
     #choice: maximize, minimize
     optimize_mode: maximize
 trial:
-  command: python train.py --epochs 50 --teacher resnet110 --student resnet8 --cuda 1
+  command: python train_ship.py --epochs 50 --cuda 1
   codeDir: .
   gpuNum: 1

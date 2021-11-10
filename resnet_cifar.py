@@ -194,18 +194,18 @@ class ResNet_Cifar(nn.Module):
 
         return nn.Sequential(*layers)
 
-    def forward(self, x):
-        x = self.conv1(x)
-        x = self.bn1(x)
-        x = self.relu(x)
+    def forward(self, x):#[3, 3, 32, 32]
+        x = self.conv1(x)#[3, 16, 32, 32]
+        x = self.bn1(x)#
+        x = self.relu(x)#[3, 16, 32, 32]
 
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
+        x = self.layer1(x)#[3, 16, 32, 32]
+        x = self.layer2(x)#[3, 32, 16, 16]
+        x = self.layer3(x)#[3, 64, 8, 8]
 
-        x = self.avgpool(x)
-        x = x.view(x.size(0), -1)
-        x = self.fc(x)
+        x = self.avgpool(x)#[3, 64, 1, 1]
+        x = x.view(x.size(0), -1)#[3, 64]
+        x = self.fc(x)#[3, num_classes]
 
         return x
 
